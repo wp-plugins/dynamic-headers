@@ -11,17 +11,18 @@ Dynamic Headers does just what you think it would based on the name - it allows 
 == Description ==
 
 Features:
-* Set different headers for each page and post.
-* Use different media types on each page (image files, flash files).
-* Cross browser compliant embed code automatically generated.
-* Can set default header for pages/posts without set header image.
-* Fails gracefully if no header media present for current page.
-* Random media for individual pages/posts and default media.
-* Alt / Title tag management for images.
-* Supports both built in browser uploader or FTP.
-* Quick and lightweight.
-* Simply add template tag to theme to pull dynamic media.
-* Tested and validated to work on WordPress version 2.6+
+
+-  Set different headers for each page and post.
+-  Use different media types on each page (image files, flash files).
+-  Cross browser compliant embed code automatically generated.
+-  Can set default header for pages/posts without set header image.
+-  Fails gracefully if no header media present for current page.
+-  Random media for individual pages/posts and default media.
+-  Alt / Title tag management for images.
+-  Supports both built in browser uploader or FTP.
+-  Quick and lightweight.
+-  Simply add template tag to theme to pull dynamic media.
+-  Tested and validated to work on WordPress version 2.6+
 
 == Installation ==
 
