@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
-Version: 2.0
+Version: 2.6
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://blog.nicasiodesign.com
@@ -62,7 +62,7 @@ if (!class_exists("custom_header")) {
 		
 		function headerCode(){
 			echo '<script language="javascript">AC_FL_RunContent = 0;</script>';
-			echo '<script type=\'text/javascript\' src="'. get_bloginfo('wpurl') . '/wp-content/plugins/custom-header/AC_RunActiveContent.js"></script>';
+			echo '<script type=\'text/javascript\' src="'. get_bloginfo('wpurl') . '/wp-content/plugins/dynamic-headers/AC_RunActiveContent.js"></script>';
 		}
 		
 		//Update the db and parse the data
@@ -102,7 +102,7 @@ if (!class_exists("custom_header")) {
 
 //This function will actually build the admin menu
 function dhnd_menu() {
-  add_menu_page('Headers', 'Headers', 8, __FILE__, 'dhnd_main_menu', '/wp-content/plugins/custom-header/images/custom_header_icon.png');
+  add_menu_page('Headers', 'Headers', 8, __FILE__, 'dhnd_main_menu', '/wp-content/plugins/dynamic-headers/images/custom_header_icon.png');
   add_submenu_page(__FILE__, 'Directions', 'Directions', 8, __FILE__, 'dhnd_main_menu');
   add_submenu_page(__FILE__, 'Add New File', 'Add New File', 8, 'dhnd_add_menu', 'dhnd_add_menu');
   add_submenu_page(__FILE__, 'Manage Files', 'Manage Files', 8, 'dhnd_manage_files', 'dhnd_manage_files');
@@ -111,23 +111,23 @@ function dhnd_menu() {
 }
 
 function dhnd_about() {
-	include(ABSPATH."/wp-content/plugins/custom-header/admin/about.php");
+	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/about.php");
 }
 
 function dhnd_main_menu() {
-	include(ABSPATH."/wp-content/plugins/custom-header/admin/directions.php");
+	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/directions.php");
 }
 
 function dhnd_add_menu() {
-	include(ABSPATH."/wp-content/plugins/custom-header/admin/main.php");
+	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/main.php");
 }
 
 function dhnd_options() {
-	include(ABSPATH."/wp-content/plugins/custom-header/admin/options.php");
+	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/options.php");
 }
 
 function dhnd_manage_files() {
-	include(ABSPATH."/wp-content/plugins/custom-header/admin/manage.php");
+	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/manage.php");
 }
  
 
@@ -168,7 +168,7 @@ function create_ch_form() {
 				echo '<option value="Random">-- Random Media Header --</option>';
 			}
 			echo '';
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/custom-header/header-images/")){
+			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if($media_file == $m_file){
@@ -187,9 +187,9 @@ function create_ch_form() {
 			$filetype = end($file_array);
 			
 			if($filetype != 'swf'){
-				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/custom-header/header-images/'.$media_file.'" style="width:30%;margin-top:10px;" />';
+				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$media_file.'" style="width:30%;margin-top:10px;" />';
 			} else {
-				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/custom-header/images/Flash-logo.png" style="position:relative;top:8px;" /> '. $media_file;
+				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/images/Flash-logo.png" style="position:relative;top:8px;" /> '. $media_file;
 			}
 		?>
 		<br />
@@ -225,7 +225,7 @@ function dhnd_footer(){
 
 function get_random_media_item(){
 	//Open the media directory and add all of the images to an array.
-	if($media_dir = opendir(ABSPATH."wp-content/plugins/custom-header/header-images/")){
+	if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
 		while ($m_file = readdir($media_dir)) {
 			if($m_file != "." && $m_file != ".."){
 				$media_array[] = $m_file;
@@ -292,7 +292,7 @@ function show_media_header(){
 				$dhnd_alt_tag = get_option('dhnd_'.$load_this_media);
 			}
 
-			echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/custom-header/header-images/'.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
+			echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
 		} else {
 			$swf_array = explode(".", $load_this_media);
 			
@@ -303,7 +303,7 @@ function show_media_header(){
 				$i++;
 			}
 			
-			$swf_src = '/wp-content/plugins/custom-header/header-images/'.$load_this_media;
+			$swf_src = '/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media;
 			list($width, $height, $type, $attr) = getimagesize($swf_src);
 		?>
 			<script language="javascript">
@@ -314,7 +314,7 @@ function show_media_header(){
 					'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
 					'width', '<?php echo $width; ?>',
 					'height', '<?php echo $height; ?>',
-					'src', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/custom-header/header-images/'.$swf_name; ?>',
+					'src', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$swf_name; ?>',
 					'quality', 'high',
 					'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
 					'align', 'middle',
@@ -329,7 +329,7 @@ function show_media_header(){
 					'menu', 'true',
 					'allowFullScreen', 'false',
 					'allowScriptAccess','sameDomain',
-					'movie', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/custom-header/header-images/'.$swf_name; ?>',
+					'movie', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$swf_name; ?>',
 					'salign', ''
 					); //end AC code
 				}
