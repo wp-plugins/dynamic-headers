@@ -1,0 +1,70 @@
+=== Dynamic Headers ===
+Contributors: k0pper,css_wizard
+Donate link: http://blog.nicasiodesign.com
+Tags: header, images, dynamic
+Requires at least: 2.6
+Tested up to: 2.7.1
+Stable tag: 2.0
+
+Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
+
+== Description ==
+
+Features
+* Set different headers for each page and post.
+* Use different media types on each page (image files, flash files).
+* Cross browser compliant embed code automatically generated.
+* Can set default header for pages/posts without set header image.
+* Fails gracefully if no header media present for current page.
+* Random media for individual pages/posts and default media.
+* Alt / Title tag management for images.
+* Supports both built in browser uploader or FTP.
+* Quick and lightweight.
+* Simply add template tag to theme to pull dynamic media.
+* Tested and validated to work on WordPress version 2.6+
+
+== Installation ==
+
+These are the directions for the install. Be sure to read Directions for Use before using.
+
+1. Upload `the custom-header` directory to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Make sure /wp-content/plugins/custom-header/header-images/ is writable (777)
+1. Read the Directions for Use
+
+
+== Directions for Use ==
+
+1. After installing the plugin you will need to make sure /wp-content/plugins/custom-header/header-images/ is writable. If you are unsure on how to do this, consult your hosting company, your help files for your hosting, your FTP client documentation, etc. This process can vary from server to server.
+
+If the directory is not writable you should be seeing an error message at the top of the plugin admin pages.
+
+1. Upload media (using the filtypes listed above) on the Add New File Page.
+
+1. Go to the Settings Page and set your default header image. If you do not set a default header image, no media will be shown for posts and pages that do not have a header image associated with it.
+
+Alternatively, you can also add images to the /wp-content/plugins/custom-header/header-images/ directory using your FTP client or other file manager.
+
+1. Create or edit a post or page and at the bottom of the page you will see a new box called “Dynamic Header by Nicasio Design”. Select from the drop down one of your uploaded media files. This media will be shown only on the page or posts you set it to appear on.
+
+1. Now you will need to add the template tag created by the plugin to your theme file where you want your dynamic header to appear (this will usually be in wp-content/themes/your-theme-name/header.php).
+
+You have 2 options for adding your dynamic header:
+
+**Option 1 (Recommended)**: Simply drop the this line of code into your theme file
+
+`<?php show_media_header(); ?>`
+
+This will automatically determine what type of media you are using and generate the appropriate code to insert it. No other coding is required on your part.
+
+**Option 2**: You can use this line of code to simply get the URL of the media for a particular post or page. This will allow you to do some more advanced things and embed the media yourself if you know what you are doing.
+
+`<?php $dynamic_header_url = get_media_header_url(); ?>`
+
+You can then use the variable `$dynamic_header_url` however you see fit. It will contain the full path to your media file.
+
+It is advised that most users simply use Option 1 as it is significantly more simple.
+
+**Note:** This function can return NULL or the string ‘None’ if there are no headers for the current page.
+
+**Important Notes**: On archive pages, the header media is controlled by the first post in the list. We plan to add control for archives pages separately in a future release, but for now, be aware that the first post on an archives page controls that page’s header.
