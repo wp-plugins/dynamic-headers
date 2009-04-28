@@ -4,13 +4,13 @@ Donate link: http://blog.nicasiodesign.com
 Tags: header, images, dynamic
 Requires at least: 2.6
 Tested up to: 2.7.1
-Stable tag: 2.0
+Stable tag: 2.3
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
 == Description ==
 
-Features
+Features:
 * Set different headers for each page and post.
 * Use different media types on each page (image files, flash files).
 * Cross browser compliant embed code automatically generated.
@@ -27,9 +27,9 @@ Features
 
 These are the directions for the install. Be sure to read Directions for Use before using.
 
-1. Upload `the custom-header` directory to the `/wp-content/plugins/` directory
+1. Upload 'the custom-header' directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Make sure /wp-content/plugins/custom-header/header-images/ is writable (777)
+1. Make sure `/wp-content/plugins/custom-header/header-images/` is writable (777)
 1. Read the Directions for Use
 
 

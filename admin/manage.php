@@ -6,7 +6,7 @@
 	
 	if($_POST['delete'] == 'yes'){
 		$myFile = $_POST['mediaHeader'];
-		unlink(ABSPATH."wp-content/plugins/custom-header/header-images/".$myFile);
+		unlink(ABSPATH."wp-content/plugins/dynamic-headers/header-images/".$myFile);
 		
 		echo '<div style="background-color: rgb(255, 251, 204);" id="message" class="updated fade"><p>File: <strong>'.$myFile.'</strong> has been deleted.</p></div>';
 	}
@@ -25,7 +25,7 @@
 			<option value="None">-- No Media Header --</option>
 			<?php
 			//Print out the media file list
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/custom-header/header-images/")){
+			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if($media_file == $m_file){
@@ -51,7 +51,7 @@
 			<option value="None">-- No Media Header --</option>
 			<?php
 			//Print out the media file list
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/custom-header/header-images/")){
+			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if($media_file == $m_file){
