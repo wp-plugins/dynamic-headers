@@ -5,7 +5,7 @@
 	
 	if($_POST['upit'] == 'yes'){
 		//Set the target using the WordPress ABSPATH constant
-		$target = ABSPATH."/wp-content/plugins/custom-header/header-images/";
+		$target = ABSPATH."/wp-content/plugins/dynamic-headers/header-images/";
 		$target = $target . basename( $_FILES['uploaded']['name']) ;
 		
 		$uploaded_size = $_FILES['uploaded']['size'];
@@ -26,11 +26,11 @@
 		}
 		
 		//Set the path of where the upload is going to take place.
-		$path = ABSPATH."wp-content/plugins/custom-header/header-images/";
+		$path = ABSPATH."wp-content/plugins/dynamic-headers/header-images/";
 		
 		//Check to see if the directory is writable.
 		if(is__writable($path) != true){
-			$errors[] = "It looks like <strong>wp-content/plugins/custom-header/header-images/</strong> is not writable.<br /><br /> You will need to make this directory writable in order for the plugin to work.<br />";
+			$errors[] = "It looks like <strong>wp-content/plugins/dynamic-headers/header-images/</strong> is not writable.<br /><br /> You will need to make this directory writable in order for the plugin to work.<br />";
 			$ok = 0;
 		}
 
