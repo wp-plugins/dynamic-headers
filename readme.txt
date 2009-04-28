@@ -4,7 +4,7 @@ Donate link: http://blog.nicasiodesign.com
 Tags: header, images, dynamic
 Requires at least: 2.6
 Tested up to: 2.7.1
-Stable tag: 2.5
+Stable tag: 2.6
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
@@ -29,13 +29,13 @@ These are the directions for the install. Be sure to read Directions for Use bef
 
 1. Upload 'the custom-header' directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Make sure `/wp-content/plugins/custom-header/header-images/` is writable (777)
+1. Make sure `/wp-content/plugins/dynamic-headers/header-images/` is writable (777)
 1. Read the Directions for Use
 
 
 == Directions for Use ==
 
-1. After installing the plugin you will need to make sure /wp-content/plugins/custom-header/header-images/ is writable. If you are unsure on how to do this, consult your hosting company, your help files for your hosting, your FTP client documentation, etc. This process can vary from server to server.
+1. After installing the plugin you will need to make sure /wp-content/plugins/dynamic-headers/header-images/ is writable. If you are unsure on how to do this, consult your hosting company, your help files for your hosting, your FTP client documentation, etc. This process can vary from server to server.
 
 If the directory is not writable you should be seeing an error message at the top of the plugin admin pages.
 
@@ -43,7 +43,7 @@ If the directory is not writable you should be seeing an error message at the to
 
 1. Go to the Settings Page and set your default header image. If you do not set a default header image, no media will be shown for posts and pages that do not have a header image associated with it.
 
-Alternatively, you can also add images to the /wp-content/plugins/custom-header/header-images/ directory using your FTP client or other file manager.
+Alternatively, you can also add images to the /wp-content/plugins/dynamic-headers/header-images/ directory using your FTP client or other file manager.
 
 1. Create or edit a post or page and at the bottom of the page you will see a new box called “Dynamic Header by Nicasio Design”. Select from the drop down one of your uploaded media files. This media will be shown only on the page or posts you set it to appear on.
 
