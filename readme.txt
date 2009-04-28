@@ -39,7 +39,7 @@ These are the directions for the install. Be sure to read Directions for Use bef
 1. After installing the plugin you will need to make sure /wp-content/plugins/dynamic-headers/header-images/ is writable. If you are unsure on how to do this, consult your hosting company, your help files for your hosting, your FTP client documentation, etc. This process can vary from server to server. If the directory is not writable you should be seeing an error message at the top of the plugin admin pages.
 1. Upload media (using the filtypes listed above) on the Add New File Page.
 1. Go to the Settings Page and set your default header image. If you do not set a default header image, no media will be shown for posts and pages that do not have a header image associated with it.Alternatively, you can also add images to the /wp-content/plugins/dynamic-headers/header-images/ directory using your FTP client or other file manager.
-1. Create or edit a post or page and at the bottom of the page you will see a new box called “Dynamic Header by Nicasio Design”. Select from the drop down one of your uploaded media files. This media will be shown only on the page or posts you set it to appear on.
+1. Create or edit a post or page and at the bottom of the page you will see a new box called "Dynamic Header by Nicasio Design". Select from the drop down one of your uploaded media files. This media will be shown only on the page or posts you set it to appear on.
 1. Now you will need to add the template tag created by the plugin to your theme file where you want your dynamic header to appear (this will usually be in wp-content/themes/your-theme-name/header.php).
 
 You have 2 options for adding your dynamic header:
@@ -58,6 +58,6 @@ You can then use the variable `$dynamic_header_url` however you see fit. It will
 
 It is advised that most users simply use Option 1 as it is significantly more simple.
 
-**Note:** This function can return NULL or the string ‘None’ if there are no headers for the current page.
+**Note:** This function can return NULL or the string "None" if there are no headers for the current page.
 
-**Important Notes**: On archive pages, the header media is controlled by the first post in the list. We plan to add control for archives pages separately in a future release, but for now, be aware that the first post on an archives page controls that page’s header.
+**Important Notes**: On archive pages, the header media is controlled by the first post in the list. We plan to add control for archives pages separately in a future release, but for now, be aware that the first post on an archives page controls that page's header.
