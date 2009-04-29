@@ -66,5 +66,6 @@ It is advised that most users simply use Option 1 as it is significantly more si
 
 == Screenshots ==
 
-1. Add New
-2. Settings Page
+1. Add new media to be used as a dynamic header.
+2. Settings page for the plugin.
+3. The Dynamic Header box on the post/page editing page.
