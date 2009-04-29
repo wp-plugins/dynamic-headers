@@ -31,7 +31,7 @@ These are the directions for the install. Be sure to read Directions for Use bef
 1. Upload 'the custom-header' directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Make sure `/wp-content/plugins/dynamic-headers/header-images/` is writable (777)
-1. Read the Directions for Use
+1. Read the Other Notes page for Directions for Use. These directions are also contained in the plugin.
 
 
 == Directions for Use ==
@@ -61,3 +61,8 @@ It is advised that most users simply use Option 1 as it is significantly more si
 **Note:** This function can return NULL or the string "None" if there are no headers for the current page.
 
 **Important Notes**: On archive pages, the header media is controlled by the first post in the list. We plan to add control for archives pages separately in a future release, but for now, be aware that the first post on an archives page controls that page's header.
+
+== Screenshots ==
+
+1. Add New
+2. Settings Page
