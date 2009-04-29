@@ -35,6 +35,23 @@ These are the directions for the install. Be sure to read Directions for Use bef
 1. Make sure `/wp-content/plugins/dynamic-headers/header-images/` is writable (777)
 1. Read the Other Notes page for Directions for Use. These directions are also contained in the plugin.
 
+== Frequently Asked Questions ==
+
+= Does this plugin automatically resize my files? =
+
+No. To keep the process simple for both us and you (and to insure you have a large amount of flexibility in the use of our template tags) we do not resize your media files. This could be an option on future release.
+
+= Why am I seeing an image I didn't set on an archive page or the home page? =
+
+Due to the way WordPress handles post ID's on an archive page, or the blog homepage, the first post is what will determine what dynamic media is pulled. You can overwrite the image for the homepage on the plugin's Settings page. We plan to add override support for the other archive pages on a future release.
+
+= Does the template tag have to go in header.php? =
+
+Absolutely not. You are limited only by your imagination (and theme editing abilities) on how/where you want to drop the dynamic media tag in your theme.
+
+= Can I upload media via FTP instead of using the browser based uploader? =
+
+Sure, just upload your media to `/wp-content/plugins/dynamic-headers/headers/header-images/`.
 
 == Directions for Use ==
 
