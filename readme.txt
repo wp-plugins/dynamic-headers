@@ -10,7 +10,9 @@ Dynamic Headers does just what you think it would based on the name - it allows 
 
 == Description ==
 
-Features:
+Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
+
+**Features:**
 
 -  Set different headers for each page and post.
 -  Use different media types on each page (image files, flash files).
