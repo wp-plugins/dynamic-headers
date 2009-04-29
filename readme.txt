@@ -51,7 +51,7 @@ Absolutely not. You are limited only by your imagination (and theme editing abil
 
 = Can I upload media via FTP instead of using the browser based uploader? =
 
-Sure, just upload your media to `/wp-content/plugins/dynamic-headers/headers/header-images/`.
+Sure, just upload your media to `/wp-content/plugins/dynamic-headers/header-images/`.
 
 == Directions for Use ==
 
