@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
-Version: 2.6
+Version: 2.7
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://blog.nicasiodesign.com
@@ -303,7 +303,7 @@ function show_media_header(){
 				$i++;
 			}
 			
-			$swf_src = '/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media;
+			$swf_src = ABSPATH.'/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media;
 			list($width, $height, $type, $attr) = getimagesize($swf_src);
 		?>
 			<script language="javascript">
