@@ -5,7 +5,7 @@
 	
 	if($_POST['upit'] == 'yes'){
 		//Set the target using the WordPress ABSPATH constant
-		$target = ABSPATH."/wp-content/plugins/dynamic-headers/header-images/";
+		$target = $dhnd_image_dir;
 		$target = $target . basename( $_FILES['uploaded']['name']) ;
 		
 		$uploaded_size = $_FILES['uploaded']['size'];
@@ -26,11 +26,11 @@
 		}
 		
 		//Set the path of where the upload is going to take place.
-		$path = ABSPATH."wp-content/plugins/dynamic-headers/header-images/";
+		$path = $dhnd_image_dir;
 		
 		//Check to see if the directory is writable.
 		if(is__writable($path) != true){
-			$errors[] = "It looks like <strong>wp-content/plugins/dynamic-headers/header-images/</strong> is not writable.<br /><br /> You will need to make this directory writable in order for the plugin to work.<br />";
+			$errors[] = "It looks like <strong>wp-content/header-images/</strong> is not writable.<br /><br /> You will need to make this directory writable in order for the plugin to work.<br />";
 			$ok = 0;
 		}
 
@@ -68,7 +68,9 @@
 				echo "Sorry, there was a problem uploading your file. You may need to check your folder permissions or other server settings.";
 			}
 			
-			add_option('dhnd_'.$_FILES['uploaded']['name'],$_POST['altText']);
+			add_option('dhnd_'.$_FILES['uploaded']['name'].'_alt',$_POST['altText']);
+			add_option('dhnd_'.$_FILES['uploaded']['name'].'_link',$_POST['linkurl']);
+			add_option('dhnd_'.$_FILES['uploaded']['name'].'_target',$_POST['target']);
 		}
 	}
 ?>
@@ -88,6 +90,24 @@
 			<td><input type="text" name="altText" id="altText" />
 				<br />
 				<span class="setting-description">The alt text is shown when your image can't be displayed by a browser.<br />It is also read by search engines, so make it descriptive.</span>
+			</td>
+		</tr>
+		<tr valign="top">
+			<th scope="row">Link URL:</th>
+			<td><input type="text" name="linkurl" id="linkurl" value="http://" />
+				<br />
+				<span class="setting-description">If you want this image to have a link associated with it, enter the FULL URL (example: http://google.com) here.<br />Leave blank for no link.</span>
+			</td>
+		</tr>
+		<tr valign="top">
+			<th scope="row">Link Target:</th>
+			<td>
+				<select name="target">
+					<option value="">Same Window</option>
+					<option value="_blank">New Window</option>
+				</select>
+				<br />
+				<span class="setting-description">This is how the browser will open the link if there is one.</span>
 			</td>
 		</tr>
 	</table>

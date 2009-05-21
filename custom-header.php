@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
-Version: 2.7
+Version: 2.8
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://blog.nicasiodesign.com
@@ -23,9 +23,10 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+$dhnd_image_dir = ABSPATH.'wp-content/header-images/';
+$dhnd_image_url_base = get_bloginfo('wpurl').'/wp-content/header-images/';
 
-//Check to see if someone else has used my class name so that my plugin won't break WP
-//All plugin devs should do this to avoid naming collisions!
+
 if (!class_exists("custom_header")) {
 	class custom_header {
 		
@@ -58,6 +59,7 @@ if (!class_exists("custom_header")) {
 			add_option('dhnd_default', 'None');
 			add_option('dhnd_homepage', 'None');
 			add_option('dhnd_footer_link', 'Yes');
+			add_option('dhnd_image_dir', 'wp-content/header-images/');
 		}
 		
 		function headerCode(){
@@ -159,16 +161,24 @@ function create_ch_form() {
 		<label for="mediaHeader" style="display:block;font-weight:bold;margin-bottom:5px;">Header Image for This Page</label>
 		<p>This drop down shows a list of all media you have uploaded through the <a href="/wp-admin/admin.php?page=dhnd_add_menu">Upload Page</a>. <br />This could be a .jpg, .jpeg, .gif, .png, .swf file.<br />If you insert a flash file the plugin will automatically generate the cross browser compatible code to embed the file.</p>
 		<select name="mediaHeader" id="mediaHeader">
-			<option value="None">-- No Media Header --</option>
 			<?php
 			//Print out the media file list
+			if($media_file == 'Default'){
+				echo '<option value="Default" selected>-- Default Media Header --</option>';
+			} else {
+				echo '<option value="Default">-- Default Media Header --</option>';
+			}
 			if($media_file == 'Random'){
 				echo '<option value="Random" selected>-- Random Media Header --</option>';
 			} else {
 				echo '<option value="Random">-- Random Media Header --</option>';
 			}
-			echo '';
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
+			if($media_file == 'None'){
+				echo '<option value="None" selected>-- No Media Header --</option>';
+			} else {
+				echo '<option value="None">-- No Media Header --</option>';
+			}					
+			if($media_dir = opendir($dhnd_image_dir)){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if($media_file == $m_file){
@@ -187,7 +197,7 @@ function create_ch_form() {
 			$filetype = end($file_array);
 			
 			if($filetype != 'swf'){
-				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$media_file.'" style="width:30%;margin-top:10px;" />';
+				echo '<img src="'.get_bloginfo('wpurl').$dhnd_image_dir.$media_file.'" style="width:30%;margin-top:10px;" />';
 			} else {
 				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/images/Flash-logo.png" style="position:relative;top:8px;" /> '. $media_file;
 			}
@@ -225,7 +235,7 @@ function dhnd_footer(){
 
 function get_random_media_item(){
 	//Open the media directory and add all of the images to an array.
-	if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
+	if($media_dir = opendir($dhnd_image_dir)){
 		while ($m_file = readdir($media_dir)) {
 			if($m_file != "." && $m_file != ".."){
 				$media_array[] = $m_file;
@@ -236,10 +246,32 @@ function get_random_media_item(){
 	return $media_array[rand(0,count($media_array)-1)];
 }
 
+function process_media_header($initial_file_value){
+	//If the option is random we need to get a random image to use.
+	switch($initial_file_value) {
+		case 'Random':
+			$load_this_media = get_random_media_item();
+			break;
+		case 'Default':
+			$load_this_media = get_option('dhnd_default');
+			break;
+		case 'None':
+			$load_this_media = "None";
+			break;
+		case '':
+			$load_this_media = "None";
+			break;
+		default:
+			$load_this_media = $initial_file_value;
+	}
+	
+	return $load_this_media;
+}
+
 function show_media_header(){
+	global $dhnd_image_url_base;
 	global $post;
 	$post_id = $post->ID;
-	$load_this_media = 'None';
 	//Declare the wpdb var and table name and run the query to see if there is a media object associated with this post
 	global $wpdb;
 	$table_name = $wpdb->prefix . "custom_headers";
@@ -247,37 +279,16 @@ function show_media_header(){
 	
 	//This large chunk of code determines what page we are on and whether to load a fixed or random header.
 	if(!is_home()){
-		//If there isn't one, do this stuff:
-		if($check_q == NULL) {
+		if($check_q->url == 'Default' || $check_q->url == '') {
 			$initial_file_value = get_option('dhnd_default');
-			
-			//If the option is random we need to get a random image to use.
-			if($initial_file_value == 'Random'){
-				$load_this_media = get_random_media_item();
-			} else {
-				$load_this_media = $initial_file_value;
-			}
-			
-		//If there is an image associated with this post then set the file URL value to the queried URL.
 		} else {
 			$initial_file_value = $check_q->url;
-			
-			//If the option is random we need to get a random image to use.
-			if($initial_file_value == 'Random'){
-				$load_this_media = get_random_media_item();
-			} else {
-				$load_this_media = $initial_file_value;
-			}
 		}
 	} else {
 		$initial_file_value = get_option('dhnd_homepage');
-		
-		if($initial_file_value == 'Random'){
-			$load_this_media = get_random_media_item();
-		} else {
-			$load_this_media = $initial_file_value;
-		}
 	}
+	
+	$load_this_media = process_media_header($initial_file_value);
 	
 	if($load_this_media != 'None' && $load_this_media != ""){
 		$file_array = explode(".", $load_this_media);
@@ -286,13 +297,26 @@ function show_media_header(){
 		$filetype = end($file_array);
 		
 		if($filetype != 'swf'){
-			if(get_option('dhnd_'.$load_this_media) == ""){
+			if(get_option('dhnd_'.$load_this_media.'_alt') == ""){
 				$dhnd_alt_tag = $load_this_media;
 			} else {
-				$dhnd_alt_tag = get_option('dhnd_'.$load_this_media);
+				$dhnd_alt_tag = get_option('dhnd_'.$load_this_media.'_alt');
+			}
+			
+			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
+				if(get_option('dhnd_'.$load_this_media.'_link') != ""){
+					$ch_target = 'target="'.get_option('dhnd_'.$load_this_media.'_link').'"';
+				} else {
+					$ch_target = "";
+				}
+				echo '<a href="'.get_option('dhnd_'.$load_this_media.'_link').'" '.$ch_target.'>';
 			}
 
-			echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
+			echo '<img src="'.$dhnd_image_url_base.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
+			
+			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
+				echo '</a>';
+			}
 		} else {
 			$swf_array = explode(".", $load_this_media);
 			
@@ -303,10 +327,10 @@ function show_media_header(){
 				$i++;
 			}
 			
-			$swf_src = ABSPATH.'/wp-content/plugins/dynamic-headers/header-images/'.$load_this_media;
+			$swf_src = $dhnd_image_url_base.$load_this_media;
 			list($width, $height, $type, $attr) = getimagesize($swf_src);
 		?>
-			<script language="javascript">
+			<script type="text/javascript">
 				if (AC_FL_RunContent == 0) {
 					alert("This page requires AC_RunActiveContent.js.");
 				} else {
@@ -314,7 +338,7 @@ function show_media_header(){
 					'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
 					'width', '<?php echo $width; ?>',
 					'height', '<?php echo $height; ?>',
-					'src', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$swf_name; ?>',
+					'src', '<?php echo $dhnd_image_url_base.$swf_name; ?>',
 					'quality', 'high',
 					'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
 					'align', 'middle',
@@ -329,7 +353,7 @@ function show_media_header(){
 					'menu', 'true',
 					'allowFullScreen', 'false',
 					'allowScriptAccess','sameDomain',
-					'movie', '<?php echo get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/header-images/'.$swf_name; ?>',
+					'movie', '<?php echo $dhnd_image_url_base.$swf_name; ?>',
 					'salign', ''
 					); //end AC code
 				}
@@ -339,60 +363,42 @@ function show_media_header(){
 				<param name="allowScriptAccess" value="sameDomain" />
 				<param name="allowFullScreen" value="false" />
 				<param name="wmode" value="transparent" />
-				<param name="movie" value="<?php echo get_bloginfo('wpurl').'/'.$swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
-				<embed src="<?php echo get_bloginfo('wpurl').'/'.$swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+				<param name="movie" value="<?php echo '/'.$swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
+				<embed src="<?php echo '/'.$swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 				</object>
 			</noscript>
 		<?php
 		}
 	}
-	
 	unset($load_this_media);
 }
 
 function get_media_header_url() {
-	//Declare the wpdb var and table name and run the query to see if there is a media object associated with this post
-	global $wpdb;
 	global $post;
 	$post_id = $post->ID;
+	//Declare the wpdb var and table name and run the query to see if there is a media object associated with this post
+	global $wpdb;
 	$table_name = $wpdb->prefix . "custom_headers";
 	$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' AND header_type='media' LIMIT 1");
 	
 	//This large chunk of code determines what page we are on and whether to load a fixed or random header.
 	if(!is_home()){
-		//If there isn't one, do this stuff:
-		if($check_q == NULL) {
+		if($check_q->url == 'Default' || $check_q->url == '') {
 			$initial_file_value = get_option('dhnd_default');
-			
-			//If the option is random we need to get a random image to use.
-			if($initial_file_value == 'Random'){
-				$load_this_media = get_random_media_item();
-			} else {
-				$load_this_media = $initial_file_value;
-			}
-			
-		//If there is an image associated with this post then set the file URL value to the queried URL.
 		} else {
 			$initial_file_value = $check_q->url;
-			
-			//If the option is random we need to get a random image to use.
-			if($initial_file_value == 'Random'){
-				$load_this_media = get_random_media_item();
-			} else {
-				$load_this_media = $initial_file_value;
-			}
 		}
 	} else {
 		$initial_file_value = get_option('dhnd_homepage');
-		
-		if($initial_file_value == 'Random'){
-			$load_this_media = get_random_media_item();
-		} else {
-			$load_this_media = $initial_file_value;
-		}
 	}
 	
+	$load_this_media = process_media_header($initial_file_value);
+	
 	return $load_this_media;
+}
+
+function print_media_path(){
+	return '/wp-content/header-images/';
 }
 
 function is__writable($path) {
