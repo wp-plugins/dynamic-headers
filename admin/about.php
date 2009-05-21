@@ -1,5 +1,6 @@
 <div class="wrap">
 	<h2>Dynamic Headers - About</h2>
+<?php include("header.php"); ?>
 	
 	This plugin was written and is maintained by Dan Cannon of <a href="http://blog.nicasiodesign.com" target="_blank">Nicasio Design and Development</a>.<br />
 	<br />

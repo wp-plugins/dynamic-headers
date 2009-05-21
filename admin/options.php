@@ -31,7 +31,7 @@
 			<option value="Random" <?php if(get_option('dhnd_default') == 'Random') echo 'selected'  ?>>- Use Random Media -</option>
 			<?php
 			//Print out the media file list
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
+			if($media_dir = opendir($dhnd_image_dir)){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if(get_option('dhnd_default') == $m_file){
@@ -55,7 +55,7 @@
 			<option value="Random" <?php if(get_option('dhnd_homepage') == 'Random') echo 'selected'  ?>>- Use Random Media -</option>
 			<?php
 			//Print out the media file list
-			if($media_dir = opendir(ABSPATH."wp-content/plugins/dynamic-headers/header-images/")){
+			if($media_dir = opendir($dhnd_image_dir)){
 				while ($m_file = readdir($media_dir)) {
 					if($m_file != "." && $m_file != ".."){
 						if(get_option('dhnd_homepage') == $m_file){
