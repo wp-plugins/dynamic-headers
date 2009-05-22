@@ -4,13 +4,17 @@ Donate link: http://blog.nicasiodesign.com
 Tags: header, images, dynamic, Post, posts, plugin, page, image
 Requires at least: 2.6
 Tested up to: 2.7.1
-Stable tag: 2.8
+Stable tag: 2.9
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
 == Description ==
 
 **Important Upgrade Note:** For the new version of this plugin, the folder that holds your header files has been moved. You will need to create the directory `/wp-content/header-images/` and make it writable for this plugin to work. You will need to backup `/wp-content/plugins/dynamic-headers/header-images/` and move your header files to the new directory as the old directory will be overwritten during any automatic upgrade.
+
+**Change Log for Version 2.9:**
+
+-  Fixed a small bug causing images not to show in the page/post list in the admin due to the last upgrade.
 
 **Change Log for Version 2.8:**
 
