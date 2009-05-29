@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
-Version: 2.9
+Version: 2.9.1
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://blog.nicasiodesign.com
@@ -23,6 +23,7 @@ License: GPL
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 $dhnd_image_dir = ABSPATH.'wp-content/header-images/';
 $dhnd_image_url_base = get_bloginfo('wpurl').'/wp-content/header-images/';
 
@@ -75,28 +76,51 @@ if (!class_exists("custom_header")) {
 			$table_name = $wpdb->prefix . "custom_headers";
 			
 			//We don't want to create extra database entries for the revisions that are created with page saves
-			if(!wp_is_post_revision($post_id)){
-				
-				/*-------- Media Header Code Block ------------- */
-				//Declare the url and use it to get the filetype
-				$url = $_POST['mediaHeader'];
-				$file_array = explode(".", $url);
-				
-				//Get the filetype
-				$filetype = end($file_array);
+			if(function_exists(wp_is_post_revision)){
+				if(!wp_is_post_revision($post_id)){
+					
+					/*-------- Media Header Code Block ------------- */
+					//Declare the url and use it to get the filetype
+					$url = $_POST['mediaHeader'];
+					$file_array = explode(".", $url);
+					
+					//Get the filetype
+					$filetype = end($file_array);
 
-				//Get this page's media header
-				$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' LIMIT 1");
-				$this_id = $check_q->id;
-				
-				if($check_q != NULL){
-					$wpdb->query("
-						UPDATE $table_name SET post_id='$post_id', url='$url', filetype ='$filetype' WHERE id='$this_id'");
-				} else {
-					$wpdb->query("
-						INSERT INTO $table_name (post_id, url, filetype, header_type)
-						VALUES ('$post_id', '$url', '$filetype', 'media')");
+					//Get this page's media header
+					$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' LIMIT 1");
+					$this_id = $check_q->id;
+					
+					if($check_q != NULL){
+						$wpdb->query("
+							UPDATE $table_name SET post_id='$post_id', url='$url', filetype ='$filetype' WHERE id='$this_id'");
+					} else {
+						$wpdb->query("
+							INSERT INTO $table_name (post_id, url, filetype, header_type)
+							VALUES ('$post_id', '$url', '$filetype', 'media')");
+					}
 				}
+			} else {
+					/*-------- Media Header Code Block ------------- */
+					//Declare the url and use it to get the filetype
+					$url = $_POST['mediaHeader'];
+					$file_array = explode(".", $url);
+					
+					//Get the filetype
+					$filetype = end($file_array);
+
+					//Get this page's media header
+					$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' LIMIT 1");
+					$this_id = $check_q->id;
+					
+					if($check_q != NULL){
+						$wpdb->query("
+							UPDATE $table_name SET post_id='$post_id', url='$url', filetype ='$filetype' WHERE id='$this_id'");
+					} else {
+						$wpdb->query("
+							INSERT INTO $table_name (post_id, url, filetype, header_type)
+							VALUES ('$post_id', '$url', '$filetype', 'media')");
+					}			
 			}
 		}
 	}
@@ -148,6 +172,7 @@ function create_ch_form() {
 	global $post;
 	global $wpdb;
 	global $dhnd_image_dir;
+	global $dhnd_image_url_base;
 	
 	$this_id = $post->ID;
 	
@@ -198,7 +223,7 @@ function create_ch_form() {
 			$filetype = end($file_array);
 			
 			if($filetype != 'swf'){
-				echo '<img src="'.get_bloginfo('wpurl').$dhnd_image_dir.$media_file.'" style="width:30%;margin-top:10px;" />';
+				echo '<img src="'.$dhnd_image_url_base.$media_file.'" style="width:30%;margin-top:10px;" />';
 			} else {
 				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/dynamic-headers/images/Flash-logo.png" style="position:relative;top:8px;" /> '. $media_file;
 			}
@@ -224,6 +249,9 @@ if (isset($cl_custom_header)) {
 	  if( function_exists( 'add_meta_box' )) {
 			add_meta_box( 'myplugin_sectionid', 'Nicasio Dynamic Header', 'create_ch_form', 'page', 'advanced', 'high' );
 			add_meta_box( 'myplugin_sectionid', 'Nicasio Dynamic Header', 'create_ch_form', 'post', 'advanced', 'high' );
+	   }else{
+			add_action('dbx_post_advanced', 'create_ch_form' );
+			add_action('dbx_page_advanced', 'create_ch_form' );
 	   }
 	}
 }
@@ -305,15 +333,15 @@ function show_media_header(){
 				$dhnd_alt_tag = get_option('dhnd_'.$load_this_media.'_alt');
 			}
 			
-			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
-				if(get_option('dhnd_'.$load_this_media.'_link') != ""){
+			if(get_option('dhnd_'.$load_this_media.'_link') != "" && get_option('dhnd_'.$load_this_media.'_link') != "http://"){
+				if(get_option('dhnd_'.$load_this_media.'_target') != "" && get_option('dhnd_'.$load_this_media.'_link') != "http://"){
 					$ch_target = 'target="'.get_option('dhnd_'.$load_this_media.'_link').'"';
 				} else {
 					$ch_target = "";
 				}
 				echo '<a href="'.get_option('dhnd_'.$load_this_media.'_link').'" '.$ch_target.'>';
 			}
-
+			echo get_option('dhnd_'.$load_this_media.'_target');
 			echo '<img src="'.$dhnd_image_url_base.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
 			
 			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
