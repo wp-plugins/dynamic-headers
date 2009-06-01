@@ -1,7 +1,7 @@
 === Dynamic Headers ===
 Contributors: k0pper,css_wizard
-Donate link: http://blog.nicasiodesign.com
-Tags: header, images, dynamic, Post, posts, plugin, page, image
+Donate link: http://nicasiodesign.com/blog/
+Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.3
 Tested up to: 2.7.1
 Stable tag: 3.1

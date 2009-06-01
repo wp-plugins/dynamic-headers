@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
-Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
+Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
 Version: 3.1
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
-Author URI: http://blog.nicasiodesign.com
+Author URI: http://nicasiodesign.com/blog/
 License: GPL
 	Copyright 2009  Dan Cannon of Nicasio Design and Development  (email : dcannon1@gmail.com)
 
