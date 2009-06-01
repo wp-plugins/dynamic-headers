@@ -10,6 +10,7 @@
 
 <form method="post" action="options.php">
 <?php wp_nonce_field('update-options'); ?>
+<?php settings_fields( 'dhnd_options' ); ?> 
 
 <table class="form-table">
 

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://blog.nicasiodesign.com/category/wordpress-plugins/
-Version: 3.0
+Version: 3.1
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://blog.nicasiodesign.com
@@ -244,6 +244,7 @@ if (isset($cl_custom_header)) {
 	add_action('admin_menu', 'myplugin_add_custom_box');
 	add_action('admin_menu', 'dhnd_menu');
 	add_action('wp_footer', 'dhnd_footer');
+	add_action('admin_init', 'ch_admin_init' );
 	
 	function myplugin_add_custom_box() {
 	  if( function_exists( 'add_meta_box' )) {
@@ -260,6 +261,13 @@ function dhnd_footer(){
 	if(get_option('dhnd_footer_link') == 'Yes'){
 		echo 'Proudly using <a href="http://blog.nicasiodesign.com/category/wordpress-plugins/" target="_blank">Dynamic Headers</a> by <a href="http://nicasiodesign.com" target="_blank">Nicasio Design</a>';
 	}
+}
+
+function ch_admin_init(){
+	register_setting( 'dhnd_options', 'dhnd_max_size');
+	register_setting( 'dhnd_options', 'dhnd_default');
+	register_setting( 'dhnd_options', 'dhnd_homepage');
+	register_setting( 'dhnd_options', 'dhnd_footer_link');
 }
 
 function get_random_media_item(){
@@ -341,7 +349,7 @@ function show_media_header(){
 				}
 				echo '<a href="'.get_option('dhnd_'.$load_this_media.'_link').'" '.$ch_target.'>';
 			}
-			echo get_option('dhnd_'.$load_this_media.'_target');
+
 			echo '<img src="'.$dhnd_image_url_base.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
 			
 			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
