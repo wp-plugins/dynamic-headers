@@ -10,15 +10,15 @@ Dynamic Headers does just what you think it would based on the name - it allows 
 
 == Description ==
 
-**Important Upgrade Note:** if upgrading from 2.7 or lower, for the new version of this plugin, the folder that holds your header files has been moved. You will need to create the directory `/wp-content/header-images/` and make it writable for this plugin to work. You will need to backup `/wp-content/plugins/dynamic-headers/header-images/` and move your header files to the new directory as the old directory will be overwritten during any automatic upgrade.
+Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
+
+**Important Upgrade Note:** After version 2.7 the image folder has moved. You will need to create the directory `/wp-content/header-images/` and make it writable. You will need to backup `/wp-content/plugins/dynamic-headers/header-images/` and move your header files to the new directory before upgrading.
 
 **Change Log for Version 3.1:**
 
--  Fixed a small bug causing the link target to be printed in the header when using image links.
--  Made plugin compatible with WordPress MU and WordPress 2.8 Beta 2 - Should now be compatible with every official release since WP 2.3
+-  Fixed bug causing the link target to be printed when using image links.
+-  Made plugin compatible with WordPress MU and WordPress 2.8 Beta 2
 -  This upgrade is advised for all using the plugin
-
-Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
 
 **Features:**
 
@@ -33,22 +33,8 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 -  Quick and lightweight.
 -  Simply add template tag to theme to pull dynamic media.
 -  Tested and validated to work on WordPress version 2.3+
-
-**Change Log for Version 2.9.1:**
-
--  Fixed an issue with the new linking feature that would somtimes cause a link to display on non-linked images.
--  Made compatible with WordPress version 2.3+
-
-**Change Log for Version 2.9:**
-
--  Fixed a small bug causing images not to show in the page/post list in the admin due to the last upgrade.
-
-**Change Log for Version 2.8:**
-
--  Fixed default header bugs
--  Added ability to add links to your header images.
--  Moved header-images folder from `/wp-content/plugins/dynamic-headers/header-images/` to `/wp-content/header-images/`. This will avoid your header files being deleted or overwritten by future upgrades.
--  Other minor bug fixes and optimizations.
+-  Ability to add links to your header images.
+-  WordPress MU Compatible
 
 == Installation ==
 
