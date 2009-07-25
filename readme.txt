@@ -2,9 +2,9 @@
 Contributors: k0pper,css_wizard
 Donate link: http://nicasiodesign.com/blog/
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
-Requires at least: 2.3
+Requires at least: 2.7
 Tested up to: 2.8.2
-Stable tag: 3.2
+Stable tag: 3.3
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
@@ -12,7 +12,11 @@ Dynamic Headers does just what you think it would based on the name - it allows 
 
 Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
 
-**Important Upgrade Note:** If upgrading from Dynamic Headers 2.7 or lower: The image folder has moved. You will need to create the directory `/wp-content/header-images/` and make it writable. You will need to backup `/wp-content/plugins/dynamic-headers/header-images/` and move your header files to the new directory before upgrading.
+**Note About WordPress 2.6 and Lower:** This latest version will drop support for all versions below 2.7. This is due to increased problems with trying to make the plugin compatible with every version of WordPress as we add new features. If you are on 2.6 or lower you will need to use an earlier version of the plugin.
+
+**Change Log for Version 3.3:**
+
+-  Fixed an issue with the options page not working. **THIS IS A MUST DOWNLOAD UPDATE** if you are using WP 2.7 or higher.
 
 **Change Log for Version 3.2:**
 
@@ -39,6 +43,8 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 -  Ability to add links to your header images.
 -  WordPress MU Compatible
 -  Theme developer friendly with several template tags and functions for custom themes.
+
+**Important Upgrade Note:** If upgrading from Dynamic Headers 2.7 or lower: The image folder has moved. You will need to create the directory `/wp-content/header-images/` and make it writable. You will need to backup `/wp-content/plugins/dynamic-headers/header-images/` and move your header files to the new directory before upgrading.
 
 == Installation ==
 
