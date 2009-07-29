@@ -108,6 +108,9 @@ There are several functions/template tags you can use to customize your theme us
 
 == Changelog ==
 
+= 3.4.2 =
+* Fixed an issue causing invalid javascript to be printed in the site header.
+
 = 3.4 =  
 * Incorporated the new changelog functionality into the readme file.
 
