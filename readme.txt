@@ -4,7 +4,7 @@ Donate link: http://nicasiodesign.com/blog/
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
 Tested up to: 2.8.2
-Stable tag: 3.4
+Stable tag: 3.4.2
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
