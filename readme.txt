@@ -14,14 +14,6 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 
 **Note About WordPress 2.6 and Lower:** This latest version will drop support for all versions below 2.7. This is due to increased problems with trying to make the plugin compatible with every version of WordPress as we add new features. If you are on 2.6 or lower you will need to use an earlier version of the plugin.
 
-**Change Log for Version 3.3:**
-
--  Fixed an issue with the options page not working. **THIS IS A MUST DOWNLOAD UPDATE** if you are using WP 2.7 or higher.
-
-**Change Log for Version 3.2:**
-
-
-
 **Features:**
 
 -  Set different headers for each page and post.
