@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
-Version: 3.1
+Version: 3.4
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://nicasiodesign.com/blog/
@@ -176,7 +176,7 @@ function create_ch_form() {
 	
 	$this_id = $post->ID;
 	
-	$media_file = $wpdb->get_var("SELECT url FROM wp_custom_headers WHERE post_id='$this_id' LIMIT 1");
+	$media_file = $wpdb->get_var("SELECT url FROM ".$wpdb->prefix . "custom_headers WHERE post_id='$this_id' LIMIT 1");
 	
 	$this_url = $check_q;
 
@@ -284,6 +284,20 @@ function get_random_media_item(){
 	return $media_array[rand(0,count($media_array)-1)];
 }
 
+function dh_get_random_media_item(){
+	global $dhnd_image_dir;
+	//Open the media directory and add all of the images to an array.
+	if($media_dir = opendir($dhnd_image_dir)){
+		while ($m_file = readdir($media_dir)) {
+			if($m_file != "." && $m_file != ".."){
+				$media_array[] = $m_file;
+			}
+		}
+	}
+	
+	return $media_array[rand(0,count($media_array)-1)];
+}
+
 function process_media_header($initial_file_value){
 	//If the option is random we need to get a random image to use.
 	switch($initial_file_value) {
@@ -352,7 +366,7 @@ function show_media_header(){
 
 			echo '<img src="'.$dhnd_image_url_base.$load_this_media.'" alt="'.$dhnd_alt_tag.'" title="'.$dhnd_alt_tag.'" />';
 			
-			if(get_option('dhnd_'.$load_this_media.'_link') != ""){
+			if(get_option('dhnd_'.$load_this_media.'_link') != "" && get_option('dhnd_'.$load_this_media.'_link') != "http://"){
 				echo '</a>';
 			}
 		} else {
@@ -368,35 +382,7 @@ function show_media_header(){
 			$swf_src = $dhnd_image_url_base.$load_this_media;
 			list($width, $height, $type, $attr) = getimagesize($swf_src);
 		?>
-			<script type="text/javascript">
-				if (AC_FL_RunContent == 0) {
-					alert("This page requires AC_RunActiveContent.js.");
-				} else {
-				AC_FL_RunContent(
-					'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
-					'width', '<?php echo $width; ?>',
-					'height', '<?php echo $height; ?>',
-					'src', '<?php echo $dhnd_image_url_base.$swf_name; ?>',
-					'quality', 'high',
-					'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
-					'align', 'middle',
-					'play', 'true',
-					'loop', 'true',
-					'scale', 'showall',
-					'wmode', 'transparent',
-					'devicefont', 'false',
-					'id', 'mediaHeader',
-					'bgcolor', '#ffffff',
-					'name', 'mediaHeader',
-					'menu', 'true',
-					'allowFullScreen', 'false',
-					'allowScriptAccess','sameDomain',
-					'movie', '<?php echo $dhnd_image_url_base.$swf_name; ?>',
-					'salign', ''
-					); //end AC code
-				}
-			</script>
-			<noscript>
+
 				<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="mediaHeader" align="middle">
 				<param name="allowScriptAccess" value="sameDomain" />
 				<param name="allowFullScreen" value="false" />
@@ -404,7 +390,7 @@ function show_media_header(){
 				<param name="movie" value="<?php echo '/'.$swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
 				<embed src="<?php echo '/'.$swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 				</object>
-			</noscript>
+
 		<?php
 		}
 	}
@@ -435,8 +421,75 @@ function get_media_header_url() {
 	return $load_this_media;
 }
 
+function dh_get_page_image_url(){
+	global $post;
+	$post_id = $post->ID;
+	//Declare the wpdb var and table name and run the query to see if there is a media object associated with this post
+	global $wpdb;
+	$table_name = $wpdb->prefix . "custom_headers";
+	$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' AND header_type='media' LIMIT 1");
+	
+	//This large chunk of code determines what page we are on and whether to load a fixed or random header.
+	if(!is_home()){
+		if($check_q->url == 'Default' || $check_q->url == '') {
+			$initial_file_value = get_option('dhnd_default');
+		} else {
+			$initial_file_value = $check_q->url;
+		}
+	} else {
+		$initial_file_value = get_option('dhnd_homepage');
+	}
+	
+	$load_this_media = process_media_header($initial_file_value);
+	
+	return $load_this_media;
+}
+
+function dh_get_page_link_url() {
+	$load_this_media = get_media_header_url();
+
+	if(get_option('dhnd_'.$load_this_media.'_link') != "" && get_option('dhnd_'.$load_this_media.'_link') != "http://"){
+		return get_option('dhnd_'.$load_this_media.'_link');
+	} else {
+		return "";
+	}
+}
+
+function dh_get_page_link_target() {
+	$load_this_media = get_media_header_url();
+
+	if(get_option('dhnd_'.$load_this_media.'_target') != ""){
+		return get_option('dhnd_'.$load_this_media.'_target');
+	} else {
+		return "";
+	}
+}
+
+function dh_has_header(){
+	global $post;
+	$post_id = $post->ID;
+	//Declare the wpdb var and table name and run the query to see if there is a media object associated with this post
+	global $wpdb;
+	$table_name = $wpdb->prefix . "custom_headers";
+	$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' AND header_type='media' LIMIT 1");
+	
+	if($check_q){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
 function print_media_path(){
 	return '/wp-content/header-images/';
+}
+
+function dh_get_media_path(){
+	return '/wp-content/header-images/';
+}
+
+function dh_print_media_path(){
+	echo '/wp-content/header-images/';
 }
 
 function is__writable($path) {
