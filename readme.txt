@@ -4,7 +4,7 @@ Donate link: http://nicasiodesign.com/blog/
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
 Tested up to: 2.8.2
-Stable tag: 3.3
+Stable tag: 3.4
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
@@ -20,12 +20,7 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 
 **Change Log for Version 3.2:**
 
--  Fixed bug causing headers to not save correctly on some WP installs
--  Fixed a bug casuing an activation error with WordPress 2.6 and lower
--  Fixed bug causing a stray `</a>` tag to sometimes be printed
--  Fixed a bug causing the link target to sometimes print incorrectly
--  Switched from using a javascript loader to load Flash and went with normal method instead due to some browser issues.
--  Added several conditionals/template tags for theme developers to take advantage of. These are explored in more detail under Other Notes
+
 
 **Features:**
 
@@ -118,3 +113,19 @@ There are several functions/template tags you can use to customize your theme us
 1. Add new media to be used as a dynamic header.
 2. Settings page for the plugin.
 3. The Dynamic Header box on the post/page editing page.
+
+== Changelog ==
+
+= 3.4 =  
+* Incorporated the new changelog functionality into the readme file.
+
+= 3.3 =
+* Fixed an issue with the options page not working. **THIS IS A MUST DOWNLOAD UPDATE** if you are using WP 2.7 or higher.
+   
+= 3.2 =  
+* Fixed bug causing headers to not save correctly on some WP installs
+* Fixed a bug casuing an activation error with WordPress 2.6 and lower
+* Fixed bug causing a stray `</a>` tag to sometimes be printed
+* Fixed a bug causing the link target to sometimes print incorrectly
+* Switched from using a javascript loader to load Flash and went with normal method instead due to some browser issues.
+* Added several conditionals/template tags for theme developers to take advantage of. These are explored in more detail under Other Notes
