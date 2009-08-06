@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
-Version: 3.4.2
+Version: 3.4.3
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://nicasiodesign.com/blog/
@@ -27,20 +27,16 @@ License: GPL
 $dhnd_image_dir = ABSPATH.'wp-content/header-images/';
 $dhnd_image_url_base = get_bloginfo('wpurl').'/wp-content/header-images/';
 
-
 if (!class_exists("custom_header")) {
 	class custom_header {
-		
 		//the constructor that initializes the class
 		function custom_header() {
 		}
-		
+
 		//setup a db table to store file info in
 		function ch_install () {
 		   global $wpdb;
-
 		   $table_name = $wpdb->prefix . "custom_headers";
-		   
 		   if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
 			  $sql = "CREATE TABLE " . $table_name . " (
 			  id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -101,26 +97,26 @@ if (!class_exists("custom_header")) {
 					}
 				}
 			} else {
-					/*-------- Media Header Code Block ------------- */
-					//Declare the url and use it to get the filetype
-					$url = $_POST['mediaHeader'];
-					$file_array = explode(".", $url);
-					
-					//Get the filetype
-					$filetype = end($file_array);
+				/*-------- Media Header Code Block ------------- */
+				//Declare the url and use it to get the filetype
+				$url = $_POST['mediaHeader'];
+				$file_array = explode(".", $url);
+				
+				//Get the filetype
+				$filetype = end($file_array);
 
-					//Get this page's media header
-					$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' LIMIT 1");
-					$this_id = $check_q->id;
-					
-					if($check_q != NULL){
-						$wpdb->query("
-							UPDATE $table_name SET post_id='$post_id', url='$url', filetype ='$filetype' WHERE id='$this_id'");
-					} else {
-						$wpdb->query("
-							INSERT INTO $table_name (post_id, url, filetype, header_type)
-							VALUES ('$post_id', '$url', '$filetype', 'media')");
-					}			
+				//Get this page's media header
+				$check_q = $wpdb->get_row("SELECT * FROM $table_name WHERE post_id='$post_id' LIMIT 1");
+				$this_id = $check_q->id;
+				
+				if($check_q != NULL){
+					$wpdb->query("
+						UPDATE $table_name SET post_id='$post_id', url='$url', filetype ='$filetype' WHERE id='$this_id'");
+				} else {
+					$wpdb->query("
+						INSERT INTO $table_name (post_id, url, filetype, header_type)
+						VALUES ('$post_id', '$url', '$filetype', 'media')");
+				}			
 			}
 		}
 	}
@@ -156,7 +152,6 @@ function dhnd_manage_files() {
 	include(ABSPATH."/wp-content/plugins/dynamic-headers/admin/manage.php");
 }
  
-
 //initialize the class to a variable
 if (class_exists("custom_header")) {
 	$cl_custom_header = new custom_header();
@@ -280,7 +275,6 @@ function get_random_media_item(){
 			}
 		}
 	}
-	
 	return $media_array[rand(0,count($media_array)-1)];
 }
 
@@ -294,7 +288,6 @@ function dh_get_random_media_item(){
 			}
 		}
 	}
-	
 	return $media_array[rand(0,count($media_array)-1)];
 }
 
@@ -316,7 +309,6 @@ function process_media_header($initial_file_value){
 		default:
 			$load_this_media = $initial_file_value;
 	}
-	
 	return $load_this_media;
 }
 
@@ -382,7 +374,6 @@ function show_media_header(){
 			$swf_src = $dhnd_image_url_base.$load_this_media;
 			list($width, $height, $type, $attr) = getimagesize($swf_src);
 		?>
-
 				<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="mediaHeader" align="middle">
 				<param name="allowScriptAccess" value="sameDomain" />
 				<param name="allowFullScreen" value="false" />
@@ -390,7 +381,6 @@ function show_media_header(){
 				<param name="movie" value="<?php echo '/'.$swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
 				<embed src="<?php echo '/'.$swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 				</object>
-
 		<?php
 		}
 	}
