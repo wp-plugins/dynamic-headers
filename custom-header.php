@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
-Version: 3.4.3
+Version: 3.4.4
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://nicasiodesign.com/blog/
@@ -378,8 +378,8 @@ function show_media_header(){
 				<param name="allowScriptAccess" value="sameDomain" />
 				<param name="allowFullScreen" value="false" />
 				<param name="wmode" value="transparent" />
-				<param name="movie" value="<?php echo '/'.$swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
-				<embed src="<?php echo '/'.$swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+				<param name="movie" value="<?php echo $swf_src; ?>" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	
+				<embed src="<?php echo $swf_src; ?>" wmode="transparent" quality="high" bgcolor="#ffffff" width="<?php echo $width; ?>" height="<?php echo $height; ?>" name="mediaHeader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 				</object>
 		<?php
 		}
