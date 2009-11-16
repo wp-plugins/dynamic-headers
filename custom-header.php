@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
-Version: 3.4.5
+Version: 3.4.6
 Description: This plugin allows a custom header image to be displayed on each page
 Author: Dan Cannon
 Author URI: http://nicasiodesign.com/blog/
@@ -124,7 +124,8 @@ if (!class_exists("custom_header")) {
 
 //This function will actually build the admin menu
 function dhnd_menu() {
-  add_menu_page('Headers', 'Headers', 8, __FILE__, 'dhnd_main_menu', '/wp-content/plugins/dynamic-headers/images/custom_header_icon.png');
+	$icon_url = get_bloginfo('url').'/wp-content/plugins/dynamic-headers/images/custom_header_icon.png'
+  add_menu_page('Headers', 'Headers', 8, __FILE__, 'dhnd_main_menu', $icon_url);
   add_submenu_page(__FILE__, 'Directions', 'Directions', 8, __FILE__, 'dhnd_main_menu');
   add_submenu_page(__FILE__, 'Add New File', 'Add New File', 8, 'dhnd_add_menu', 'dhnd_add_menu');
   add_submenu_page(__FILE__, 'Manage Files', 'Manage Files', 8, 'dhnd_manage_files', 'dhnd_manage_files');
