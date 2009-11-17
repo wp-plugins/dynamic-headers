@@ -4,7 +4,7 @@ Donate link: http://nicasiodesign.com/blog/
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
 Tested up to: 2.8.6
-Stable tag: 3.4.6
+Stable tag: 3.4.7
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
@@ -12,7 +12,7 @@ Dynamic Headers does just what you think it would based on the name - it allows 
 
 Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
 
-**Note About WordPress 2.6 and Lower:** This latest version will drop support for all versions below 2.7. This is due to increased problems with trying to make the plugin compatible with every version of WordPress as we add new features. If you are on 2.6 or lower you will need to use an earlier version of the plugin.
+**3.4.6 was accidentally released with a piece of broken code. Please upgrade to 3.4.7 to alleviate this problem.**
 
 **Features:**
 
@@ -107,6 +107,9 @@ There are several functions/template tags you can use to customize your theme us
 3. The Dynamic Header box on the post/page editing page.
 
 == Changelog ==
+
+= 3.4.7 =
+* Fixed an issue caused by 3.4.6
 
 = 3.4.6 =
 * Fixed an issue causing some icons/images to not display correctly on sub-directory WordPress installations.
