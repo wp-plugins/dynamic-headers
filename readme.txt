@@ -1,18 +1,16 @@
 === Dynamic Headers ===
-Contributors: k0pper,css_wizard
-Donate link: http://nicasiodesign.com/blog/
+Contributors: dcannon1,css_wizard
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6LJ9BJN6EUFEY
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
 Tested up to: 2.9.1
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
 == Description ==
 
 Dynamic headers fills a void that has been present for a while in WordPress. It is a small, easy to use plugin that allows you to manage what header media is shown on each page/post. Unlike some other plugins however, this plugin allows you to use any image file OR a .swf Flash file. So you are no longer limited to a certain media type for your headers and you are no longer limited to one site-wide header. Enjoy.
-
-**3.4.6 was accidentally released with a piece of broken code. Please upgrade to 3.4.7 to alleviate this problem.**
 
 **Features:**
 
@@ -26,7 +24,7 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 -  Supports both built in browser uploader or FTP.
 -  Quick and lightweight.
 -  Simply add template tag to theme to pull dynamic media.
--  Tested and validated to work on WordPress version 2.3+ (Version<2.7 Only)
+-  Tested and validated to work on WordPress version 2.3+ (Version < 2.7 Only)
 -  Ability to add links to your header images.
 -  WordPress MU Compatible (As of 2.8)
 -  Theme developer friendly with several template tags and functions for custom themes.
@@ -131,6 +129,12 @@ There are several functions/template tags you can use to customize your theme us
 3. The Dynamic Header box on the post/page editing page.
 
 == Changelog ==
+
+= 3.5.0 =
+* Fixed message bug on Manage page in admin
+* Clarified some directions
+* Added some new information to the about page
+* Added donation link
 
 = 3.5.0 =
 * Made a function call to get flash dimensions reference the file by its server path rather than its URL which was causing an error to be thrown on hosts where URL file access is not allowed.
