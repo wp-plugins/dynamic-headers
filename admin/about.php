@@ -6,7 +6,9 @@
 	<br />
 	Nicasio Design is a full service web design firm specializing in WordPress.<br />
 	<br />
-	Feel free to <a href="http://nicasiodesign.com/contact-us.php" target="_blank">Contact Us Today</a>  to discuss your next WordPress project.
+	Feel free to <a href="http://nicasiodesign.com/contact-us.php" target="_blank">Contact Us Today</a>  to discuss your next WordPress project.<br />
+	<br />
+	Follow Nicasio on Twitter: <a href="http://twitter.com/nicasiodesign">http://twitter.com/nicasiodesign</a>
 	<br />
 	<h2>The Nicasio Team</h2>
 	<strong>Dan Cannon</strong> - Chief Technology Officer<br />
