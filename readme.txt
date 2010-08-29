@@ -1,9 +1,9 @@
 === Dynamic Headers ===
-Contributors: dcannon1,css_wizard
+Contributors: dcannon1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6LJ9BJN6EUFEY
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
-Tested up to: 2.9.1
+Tested up to: 3.0.1
 Stable tag: 3.5.1
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
@@ -24,14 +24,13 @@ Dynamic headers fills a void that has been present for a while in WordPress. It 
 -  Supports both built in browser uploader or FTP.
 -  Quick and lightweight.
 -  Simply add template tag to theme to pull dynamic media.
--  Tested and validated to work on WordPress version 2.3+ (Version < 2.7 Only)
+-  Tested and validated to work on WordPress version 2.3+ (Plugin Version < 2.7 Only!)
 -  Ability to add links to your header images.
 -  WordPress MU Compatible (As of 2.8)
 -  Theme developer friendly with several template tags and functions for custom themes.
+-  NOTE: The popular TwentyTen Weaver theme now includes native support for the Dynamic Headers plugin. If you are using this theme then just download Dynamic Headers and begin using it with no template or CSS mods required!
 
-**Regarding Support:** This plugin is offered completely free of charge with no expressed or implied warranty. This plugin is open source and is to be used 'as-is' and at your own risk. Always remember to backup your WordPress database (and ideally your file structure) before using any new plugin for the first time.
-
-**Important Upgrade Note:** 
+**Regarding Support:** This plugin is offered completely free of charge with no expressed or implied warranty. This plugin is open source and is to be used 'as-is' and at your own risk. Always remember to backup your WordPress database (and ideally your file structure) before using any new plugin for the first time. Most support requests we get (and we get dozens per week) have to do with changing a theme's CSS to accomodate the new headers. We simply don't have the man power to answer all of these questions on a case by case basis, but do try to answer some, for more popular themes, when we can. We do offer WordPress consulting, so if you really need some help and would like to hire Nicasio please let us know.
 
 == Installation ==
 
@@ -129,6 +128,9 @@ There are several functions/template tags you can use to customize your theme us
 3. The Dynamic Header box on the post/page editing page.
 
 == Changelog ==
+
+= 3.5.2 =
+* Minor fixes, readme changes to announce TwentyTen Weaver theme support and new support policy.
 
 = 3.5.0 =
 * Fixed message bug on Manage page in admin
