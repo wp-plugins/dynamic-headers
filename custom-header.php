@@ -2,7 +2,7 @@
 /*
 Plugin Name: Dynamic Headers by Nicasio Design
 Plugin URI: http://nicasiodesign.com/blog/category/wordpress-plugins/
-Version: 3.5.1
+Version: 3.5.2
 Description: Allows a custom header image or flash file to be displayed site wide, randomly or on a page by page and post by post basis. Please <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6LJ9BJN6EUFEY">Donate Today</a>
 Author: Dan Cannon
 Author URI: http://nicasiodesign.com/blog/
