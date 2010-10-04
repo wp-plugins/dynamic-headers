@@ -1,10 +1,10 @@
 === Dynamic Headers ===
 Contributors: dcannon1
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6LJ9BJN6EUFEY
+Donate link: http://nicasiodesign.com
 Tags: header, images, dynamic, Post, posts, plugin, page, image, aesthetic, small, fast, custom
 Requires at least: 2.7
 Tested up to: 3.0.1
-Stable tag: 3.5.2
+Stable tag: 3.5.3
 
 Dynamic Headers does just what you think it would based on the name - it allows you to create highly dynamic header space on your WordPress site.
 
@@ -128,6 +128,9 @@ There are several functions/template tags you can use to customize your theme us
 3. The Dynamic Header box on the post/page editing page.
 
 == Changelog ==
+
+= 3.5.3 =
+* Removed all donation references due to Paypal concerns
 
 = 3.5.2 =
 * Minor fixes, readme changes to announce TwentyTen Weaver theme support and new support policy.
